@@ -144,6 +144,7 @@ let buttons = document.querySelectorAll(".button");
 let formula = document.querySelector("#formula");
 let resultDisplay =  document.querySelector("#result");
 let insertedFlag=false;
+let dotFlag = false;
 
 for(i=0;i<buttons.length;i++){
     buttons[i].addEventListener('click',processButton);
@@ -153,7 +154,7 @@ document.addEventListener('keyup', unclickKey)
 
 function processButton(e){
     let character;
-    if(formula.innerText.length>=32 && (e.code!=='Backspace' && e.target.id!=='button-backspace')){
+    if(formula.innerText.length>=32 && (e.code!=='Backspace' && e.target.id!=='button-backspace' && e.code!=='KeyC' && e.target.id!=='button-clear' )){
         alert('Formula is too long.');
         return;
     }
@@ -171,36 +172,46 @@ function processButton(e){
     }
 
     if(character!=='equal'){
-        switch(character){
+        switch(character){             
             case 'clear':
                 formula.innerText='';
                 resultDisplay.innerText='';
+                dotFlag=false;
                 break;
             case 'plus':
                 formula.innerText += '+';
+                dotFlag=false;
                 break;
             case 'minus':
                 formula.innerText += '-';
+                dotFlag=false;
                 break;
             case 'multiply':
                 formula.innerText += '*';
+                dotFlag=false;
                 break;
             case 'divide':
                 formula.innerText += '/';
+                dotFlag=false;
                 break;
             case 'open':
                 formula.innerText += '(';
+                dotFlag=false;
                 break;
             case 'close':
                 formula.innerText += ')';
+                dotFlag=false;
                 break;
             case 'dot':
+                if(!dotFlag){
                 formula.innerText += '.';
+                dotFlag=true;
+                }
                 break;
             case 'backspace':
                 let copied=formula.innerText.slice(0,-1);
                 formula.innerText=copied;
-                return
+                return;
             default:
                 formula.innerText += character;
                 break;
@@ -218,7 +229,7 @@ function processButton(e){
     }
 
     let firstCharacter= formula.innerText[0];
-    if(insertedFlag===false && ((firstCharacter==='+'|| firstCharacter==='-' || firstCharacter==='*' || firstCharacter==='/' )&& (resultDisplay.innerText!=='ERROR' || resultDisplay.innerText!==''))){
+    if(insertedFlag===false && ((firstCharacter==='+'|| firstCharacter==='-' || firstCharacter==='*' || firstCharacter==='/' )&& (resultDisplay.innerText!=='ERROR' && resultDisplay.innerText!==''))){
         if(resultDisplay.innerText.indexOf('e')===-1){
         formula.innerText=resultDisplay.innerText+formula.innerText;
         insertedFlag=true;

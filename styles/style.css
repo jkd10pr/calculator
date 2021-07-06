@@ -1,5 +1,6 @@
+
+
 html{
-    background: radial-gradient(#000892, #000138);
     margin: 0px 0px;
     font-family: 'Roboto', sans-serif;
 }
@@ -7,6 +8,8 @@ html{
 body{
     margin: 0px 0px;
 }
+
+
 
 #main-wrapper{
     display: flex;
@@ -16,13 +19,6 @@ body{
     height: 100vh;
 }
 
-@media (max-height: 500px){
-    
-#main-wrapper{
-    padding: 10px;
-    height: inherit;
-}
-}
 
 #calculator{
     min-width: 350px;
@@ -31,7 +27,6 @@ body{
     border: 3px solid rgb(54, 54, 54);
     box-shadow: 0 0px 2em 0.5em black;
 }
-
 
 
 .background{
@@ -59,10 +54,13 @@ body{
 
 #background-block-1{
     background-color: rgb(102, 0, 102);
+    background: linear-gradient(90deg, rgba(45,0,45,1) 0%, rgba(102,0,102,1) 27%);
+
 }
 
 #background-block-2{
     background-color: rgb(51, 0, 51);
+    background: linear-gradient(270deg, rgb(30,0,30) 0%, rgba(51,0,51,1) 27%);
 }
 
 #buttons-wrapper{
@@ -149,4 +147,17 @@ body{
     height : 20px;
     font-size: 20px;
     padding-bottom: 5px;
+}
+
+@media (max-width: 500px){
+    
+    #calculator{
+        min-width: 300px;
+        margin: 20px 20px;
+    }
+
+    .button{
+        font-size: 20px;
+    }
+
 }
